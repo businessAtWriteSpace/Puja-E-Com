@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -12,8 +15,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignUpPage(),
+      home: SignInPage(),
+      /*home: StreamBuilder(
+       stream: FirebaseAuth.instance.authStateChanges(),
+       builder: (context, snapshot)=>
+       snapshot.hasData? HomePage() : SignInPage(),
+    ),*/
     );
   }
 }
+
 
